@@ -1,0 +1,13 @@
+print(" ")
+print("-Restaurang Skibidi-".center(22))
+print(" ")
+titel = "meny".upper()
+print(titel.center(22, "="))
+print("Gyatt".ljust(16, ".") + "$69.00".rjust(4))
+print("Ohio".ljust(15, ".") + "$420.00".rjust(4))
+print("Grimace".ljust(17, ".") + "$1.00".rjust(4))
+print("Detroit".ljust(17, ".") + "$0.00".rjust(4))
+print("="*22)
+print(" ")
+
+print('''Bruh det är 23:16 jag vet inte vad jag håller på med''')
