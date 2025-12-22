@@ -10,6 +10,7 @@ ENV/
 .venv/
 .pipenv/
 lob/
+ws_venv/
 
 # Distribution / packaging
 build/
