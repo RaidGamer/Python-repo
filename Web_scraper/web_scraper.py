@@ -1,13 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
-from sys import argv
+from sys import argv, exit
 from urllib.parse import urlparse
 
+try: url_inp = argv[1] 
+except IndexError: print("="*40+"\nUsage: python3 <script path> <url> <scrape type>\nScrape types:\n'-a' => all\n"+"="*40); exit(2)
+try: filter_inp = argv[2]
+except IndexError: print("="*40+"\nUsage: python3 <script path> <url> <scrape type>\nScrape types:\n'-a' => all\n"+"="*40); exit(2)
+# rest_inp = argv[3:]
 
-url_inp = argv[1]
-filter_inp = argv[2:]
-
-def soup(url): #gives soup object (html and css) to scrape info from
+def soup(url: str): #gives soup object (html and css) to scrape info from
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
     return soup
@@ -25,17 +27,24 @@ def check_robots():#satte in vilken web-url som helst, går tillbaka till root, 
         disallow_list.append(f"{base_url}/{x[11:]}")
     return disallow_list
 
+def scrape(type: str):
+    scraped = soup(url_inp) 
+    match type:
+        case e if e=="-a": 
+            return scraped.prettify()
 
 
 
-def scrape():
+
+def main():
     if check_robots().__contains__(url_inp):
         print("Given url is not accessible for scraping according to robots.txt")
     else:
         #TODO: scrape my ass
-        print("")
+        result = scrape(filter_inp)
+        print(result)
     
 
 if __name__ == "__main__": 
-    scrape()
+    main()
 
