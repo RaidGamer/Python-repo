@@ -3,11 +3,14 @@ from bs4 import BeautifulSoup
 from sys import argv, exit
 from urllib.parse import urlparse
 
+usage = "="*40+"\nUsage: python3 <script path> <url> <scrape type> <user-agent>\nScrape types:\n'-a' => all html\n\nUser Agent:\n"+"="*40
+
 try: url_inp = argv[1] 
-except IndexError: print("="*40+"\nUsage: python3 <script path> <url> <scrape type>\nScrape types:\n'-a' => all\n"+"="*40); exit(2)
+except IndexError: print(usage); exit(2)
 try: filter_inp = argv[2]
-except IndexError: print("="*40+"\nUsage: python3 <script path> <url> <scrape type>\nScrape types:\n'-a' => all\n"+"="*40); exit(2)
-# rest_inp = argv[3:]
+except IndexError: print(usage); exit(2)
+# try: user_agent = argv[3]
+# except IndexError: print(usage); exit(2) #för user-agent implementation senare 
 
 def soup(url: str): #gives soup object (html and css) to scrape info from
     response = requests.get(url)
@@ -28,10 +31,15 @@ def check_robots():#satte in vilken web-url som helst, går tillbaka till root, 
     return disallow_list
 
 def scrape(type: str):
-    scraped = soup(url_inp) 
+    scraped = soup(url_inp)
+    #TODO: scrape my ass
     match type:
         case e if e=="-a": 
+            return scraped
+        case e if e=="-p":
             return scraped.prettify()
+        case e if e=="-t":
+            print("Inte implementerad")
 
 
 
@@ -40,7 +48,6 @@ def main():
     if check_robots().__contains__(url_inp):
         print("Given url is not accessible for scraping according to robots.txt")
     else:
-        #TODO: scrape my ass
         result = scrape(filter_inp)
         print(result)
     
