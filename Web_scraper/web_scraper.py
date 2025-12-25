@@ -13,9 +13,8 @@ user_agents = ["Mozilla/5.0 (Linux; Android 9; Redmi 8 Build/PKQ1.190319.001; ru
 "Mozilla/5.0 (Linux; Android 10; SNE-LX1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.141 Mobile Safari/537.36",
 "Mozilla/5.0 (Linux; Android 9; SM-T860) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36",
 "Mozilla/5.0 (iPad; CPU OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Mobile/15E148 Safari/604.1"]
+
 real_agent = "MyWebScraper1.0 (learning project using python; non-commerical use)"
-def delay_timer(): 
-    return random.randint(3,5)
 
 try: url_inp = argv[1] 
 except IndexError: print(usage); exit(2)
@@ -23,6 +22,9 @@ try: filter_inp = argv[2]
 except IndexError: print(usage); exit(2)
 # try: user_agent = argv[3]
 # except IndexError: print(usage); exit(2) #för user-agent implementation senare 
+
+def delay_timer(): 
+    return random.randint(3,5)
 
 def soup(url: str): #gives soup object (html and css) to scrape info from, #TODO: hantera error http error codes som 429 403
     headers = {"User-Agent": real_agent}
