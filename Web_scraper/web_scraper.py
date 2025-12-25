@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup, Comment
-from bs4.element import Tag, NavigableString
+from bs4.element import Tag
 from sys import argv, exit
 from urllib.parse import urlparse
 import time 
