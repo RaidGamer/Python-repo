@@ -13,7 +13,9 @@ user_agents = ["Mozilla/5.0 (Linux; Android 9; Redmi 8 Build/PKQ1.190319.001; ru
 "Mozilla/5.0 (Linux; Android 10; SNE-LX1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.141 Mobile Safari/537.36",
 "Mozilla/5.0 (Linux; Android 9; SM-T860) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36",
 "Mozilla/5.0 (iPad; CPU OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Mobile/15E148 Safari/604.1"]
-
+real_agent = "MyWebScraper1.0 (learning project using python; non-commerical use)"
+def delay_timer(): 
+    return random.randint(3,5)
 
 try: url_inp = argv[1] 
 except IndexError: print(usage); exit(2)
@@ -22,14 +24,15 @@ except IndexError: print(usage); exit(2)
 # try: user_agent = argv[3]
 # except IndexError: print(usage); exit(2) #för user-agent implementation senare 
 
-def soup(url: str): #gives soup object (html and css) to scrape info from
-    headers = {"User-Agent": random.choice(user_agents)}
-    response = requests.get(url, headers=headers)
+def soup(url: str): #gives soup object (html and css) to scrape info from, #TODO: hantera error http error codes som 429 403
+    headers = {"User-Agent": real_agent}
+    response = requests.get(url_inp, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     print(soup)
     return soup
 
-def check_robots():#satte in vilken web-url som helst, går tillbaka till root, kollar robots, och checkar url_inp
+def check_robots():#TODO: använd urllib egen robotparser
+    time.sleep(delay_timer())
     parsed = urlparse(url_inp)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     robots = f"{base_url}/robots.txt"
@@ -42,8 +45,8 @@ def check_robots():#satte in vilken web-url som helst, går tillbaka till root, 
         disallow_list.append(f"{base_url}/{x[11:]}")
     return disallow_list
 
-def scrape(type: str):
-    time.sleep(2)
+def scrape(type: str): #TODO: använd find_all() med filters och lagra i json istället för hantera olika case match bs
+    time.sleep(delay_timer())
     scraped = soup(url_inp)
     comments = []
     headers = []
