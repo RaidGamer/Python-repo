@@ -77,7 +77,7 @@ def scrape(type: str): #TODO: använd find_all() med filters och lagra i json is
         case e if e=="-a": 
             return scraped
         case e if e=="-p":
-            return scraped.prettify()
+            return scraped
         case e if e=="-t":
             return "\n".join(output)
         case e if e=="-w":
