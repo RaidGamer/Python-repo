@@ -52,6 +52,10 @@ def soup(url: str, agent: str):
     else:
         print(f"Blocked by robots.txt: {url}")
         return -1
+    
+#MAKE FUNCTIONS THAT SCRAPE FOR DIFFERENT WEBSITE HTML'S
+# def guardian(html: BeautifulSoup):
+
 
 def main():
     html = soup(url_inp, agent)
