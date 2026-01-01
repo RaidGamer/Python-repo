@@ -54,7 +54,7 @@ def soup(url: str, agent: str):
         return -1
     
 #MAKE FUNCTIONS THAT SCRAPE FOR DIFFERENT WEBSITE HTML'S
-# def guardian(html: BeautifulSoup):
+#function 1 etc..
 
 
 def main():
